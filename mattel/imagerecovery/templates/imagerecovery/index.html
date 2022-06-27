@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   <title>Ultimate Crawler</title>
+</head>
+
+<body style="background-color: grey;">
+<nav class="navbar navbar-dark bg-dark">
+   <a class="navbar-brand text-white">Lego Crawler</a>
+   <form class="form-inline">
+      <a href="{% url 'imagerecovery:fetchAllLegos' %}" target="_blank" class="btn btn-outline-success my-2 my-sm-0" type="submit"> 
+         <i class="fas fa-eye"></i> View Toys</a>
+   </form>
+</nav>
+
+<div class="container-fluid">
+
+   <div class="row my-4" style="display: none;" id="fetchingshit">
+      <div class="col-md-8 offset-md-2">
+         <div class="alert alert-info text-center" role="alert">
+            <h5>Fetching in Progress <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> </h5>            
+            
+            <p> <i class="fas fa-warning"></i> Please Do not Close this Tab. This might take a while to complete</p>
+           
+         </div>
+      </div>
+      
+   </div>
+
+   
+   {% if all_a_list %}   
+      <div class="row my-4">
+         <div class="col-md-8 offset-md-2">
+            <div class="alert alert-success text-center" role="alert">
+               <h3>{{all_a_list}}</h3>           
+            </div>
+         </div>
+         
+      </div>
+   {% endif %}
+   {% if error %}   
+      <div class="row my-4">
+         <div class="col-md-8 offset-md-2">
+            <div class="alert alert-danger text-center" role="alert">
+               <h3>{{error}}</h3>           
+            </div>
+         </div>
+         
+      </div>
+   {% endif %}
+   <div class="row my-4">
+      <div class="col-md-8 offset-md-2">
+      <div class="card text-white bg-secondary mb-3">
+         <div class="card-header text-center" style="border-left: 3px solid white;;">
+          <h2>Click Button Below To Fetch Data</h2>
+         </div>
+         <div class="card-body text-center">
+            <div class="row">
+               <div class="col-md-6 offset-md-3">
+                  <a href="{% url 'imagerecovery:fetch_theme_category' %}" class="btn btn-success btn-block btn-lg" onclick="startfetching()" id="fetchdata">Fetch Data</a>
+               </div>
+            </div>                        
+            <div class="row my-3">
+               <div class="col-md-6 offset-md-3">
+                  <a href="{% url 'imagerecovery:donwload_csv_legos' %}" class="btn btn-success btn-block btn-lg" id="fetchdata"> <i class="fas fa-file"></i> Download Excel Copy</a>
+               </div>
+            </div>                        
+         </div>
+      </div>
+      </div>
+   </div>
+
+
+</div>
+
+
+   <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+   
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+
+
+
+
+
+      <script>
+         function startfetching(e){
+            console.log('we aer here');         
+
+            document.getElementById('fetchdata').classList.add('disabled');
+            document.getElementById('fetchingshit').style.display = 'block';
+         }
+      </script>
+</body>
+
+</html>
